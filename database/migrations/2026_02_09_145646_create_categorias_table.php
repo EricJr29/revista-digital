@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use function Symfony\Component\String\s;
+
 return new class extends Migration
 {
     /**
@@ -11,9 +13,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('postagens', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('postagens');
+        Schema::dropIfExists('categorias');
     }
 };
