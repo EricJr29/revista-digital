@@ -13,7 +13,21 @@ return new class extends Migration
     {
         Schema::create('postagens', function (Blueprint $table) {
             $table->id();
-            
+            $table->foreignId('usuario_id')
+                ->constrained('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->string('titulo');
+            $table->string('subtitulo')->nullable();
+            $table->string('categoria');
+            $table->text('conteudo');
+            $table->string('imagem');
+            $table->enum('status', [
+                'aprovado',
+                'rejeitado',
+                'pendente',
+                'revisao',
+            ]);
             $table->timestamps();
         });
     }
