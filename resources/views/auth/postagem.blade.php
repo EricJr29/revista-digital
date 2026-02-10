@@ -16,6 +16,7 @@ margin: 0;
 @livewire('postagem', [
     'user' => $user,
     'postagem' => $postagem,
+    'categorias' => $categorias,
 ])
 
 @endsection

@@ -9,6 +9,7 @@ class Categoria extends Model
     protected $table = 'categorias';
 
     protected $fillable = [
+        'id',
         'nome',
     ];
 }

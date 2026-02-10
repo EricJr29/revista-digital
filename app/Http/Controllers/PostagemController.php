@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Postagem;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,7 +57,8 @@ class PostagemController extends Controller
             ->where('usuario_id', $user->id)
             ->firstOrFail(); 
 
-        return view('auth.postagem', compact('user', 'postagem'));
+        $categorias = Categoria::all();
+        return view('auth.postagem', compact('user', 'postagem', 'categorias'));
     }
 
     /**

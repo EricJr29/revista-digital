@@ -14,10 +14,12 @@ class Postagem extends Component
     public $categoria;
     public $conteudo;
     public $status;
+    public $categorias;
 
-    public function mount($user, $postagem)
+    public function mount($user, $postagem, $categorias)
     {
         $this->user = $user;
+        $this->categorias = $categorias;
         $this->postagem_id = $postagem->id;
 
         $this->titulo = $postagem->titulo;
@@ -34,10 +36,32 @@ class Postagem extends Component
         ]);
     }
 
-    public function updatedTitulo($value) { $this->saveField('titulo', $value); }
-    public function updatedSubtitulo($value) { $this->saveField('subtitulo', $value); }
-    public function updatedCategoria($value) { $this->saveField('categoria', $value); }
-    public function updatedConteudo($value) { $this->saveField('conteudo', $value); }
+    public function finalizar()
+    {
+        PostagemModel::where('id', $this->postagem_id)->update([
+            'status' => 'pendente'
+        ]);
+        session()->flash('message', 'Projeto enviado com sucesso!');
+
+        return redirect()->route('profile');
+    }
+
+    public function updatedTitulo($value)
+    {
+        $this->saveField('titulo', $value);
+    }
+    public function updatedSubtitulo($value)
+    {
+        $this->saveField('subtitulo', $value);
+    }
+    public function updatedCategoria($value)
+    {
+        $this->saveField('categoria', $value);
+    }
+    public function updatedConteudo($value)
+    {
+        $this->saveField('conteudo', $value);
+    }
 
     public function render()
     {

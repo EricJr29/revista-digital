@@ -15,21 +15,20 @@ class CategoriaSeeder extends Seeder
     {
 
         $categorias = [
-            'Matemática',
-            'Língua Portuguesa',
-            'História',
-            'Geografia',
-            'Ciências',
-            'Educação Física',
-            'Artes',
-            'Inglês',
-            'Eventos Escolares',
-            'Avisos Gerais'
+            1 => 'Matemática',
+            2 => 'Língua Portuguesa',
+            3 => 'História',
+            4 => 'Geografia',
+            5 => 'Ciências',
+            6 => 'Educação Física',
+            7 => 'Artes',
+            8 => 'Inglês',
         ];
 
-        foreach ($categorias as $c) {
+        foreach ($categorias as $id => $nome) {
             Categoria::create([
-                'nome' => $c
+                'id'   => $id,
+                'nome' => $nome
             ]);
         }
     }
