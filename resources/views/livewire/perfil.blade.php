@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
 
-            <div class="col-6 col-md-4 border border-black" style="margin-top: -80px;">
+            <div class="col-6 col-md-4 " style="margin-top: -80px;">
                 <div class="card shadow border-0 text-center p-3 bg-slate-200 rounded-2">
 
                     <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('img/default-avatar.png') }}"
@@ -25,15 +25,34 @@
                 </div>
             </div>
 
-            <div class="border border-black col-sm-6 col-md-8 mt-4 px-4 text-center">
+            <div class=" col-sm-6 col-md-8 mt-4 px-4 text-center">
                 <div class="mb-4">
                     <h5 class="fw-bold">PROJETOS</h5>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100 border-0 bg-light shadow-sm" style="min-height: 200px;"></div>
+                    @foreach($postagens as $post)
+                    <div class="col-md-6 mb-4" wire:key="post-{{ $post->id }}">
+                        <a href="{{ route('postagem.edit', ['id' => $post->id]) }}" class="text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm hover-shadow transition" style="min-height: 200px;">
+                                @if($post->imagem)
+                                <img src="{{ asset('storage/' . $post->imagem) }}" class="card-img-top rounded-top" style="height: 120px; object-fit: cover;">
+                                @endif
+
+                                <div class="card-body d-flex flex-column justify-content-center text-center">
+                                    <h5 class="fw-bold text-dark">{{ $post->titulo ?? 'Projeto Sem Título' }}</h5>
+                                    <p class="text-muted small">{{ Str::limit($post->subtitulo, 50) }}</p>
+
+                                    <div class="mt-auto">
+                                        <span class="badge bg-primary-subtle text-primary rounded-pill px-3">
+                                            {{ ucfirst($post->status) }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
+                    @endforeach
                 </div>
             </div>
 

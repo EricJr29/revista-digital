@@ -48,9 +48,15 @@ class PostagemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Postagem $postagem)
+    public function edit($id)
     {
-        //
+        $user = Auth::user();
+
+        $postagem = Postagem::where('id', $id)
+            ->where('usuario_id', $user->id)
+            ->firstOrFail(); 
+
+        return view('auth.postagem', compact('user', 'postagem'));
     }
 
     /**

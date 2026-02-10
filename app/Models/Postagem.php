@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Postagem extends Model
 {
-    protected $table = 'postagens'; 
+    protected $table = 'postagens';
 
     protected $fillable = [
+        'usuario_id',
         'status',
     ];
 }
