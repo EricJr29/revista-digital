@@ -69,7 +69,7 @@
                     <div class="col-md-6 register-side">
                         <h3 class="fw-bold mb-4 text-success">Criar Conta</h3>
 
-                        @if($errors->any() && old('name')) {{-- Mostra erros de cadastro aqui --}}
+                        @if($errors->any() && old('name'))
                             <div class="alert alert-danger p-2 small">
                                 @foreach ($errors->all() as $error)
                                     <div>{{ $error }}</div>

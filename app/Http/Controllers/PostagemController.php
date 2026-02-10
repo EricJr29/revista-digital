@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Postagem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostagemController extends Controller
 {
@@ -18,17 +19,22 @@ class PostagemController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $user = Auth::user();
+
+        $postagem = Postagem::create([
+            'status' => 'producao',
+            'usuario_id' => $user->id,
+            'titulo' => 'Novo Projeto',
+        ]);
+
+        return redirect()->route('postagem.edit', ['id' => $postagem->id]);
     }
 
     /**

@@ -17,12 +17,13 @@ return new class extends Migration
                 ->constrained('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('titulo');
+            $table->string('titulo')->nullable();
             $table->string('subtitulo')->nullable();
-            $table->string('categoria');
-            $table->text('conteudo');
-            $table->string('imagem');
+            $table->string('categoria')->nullable();
+            $table->text('conteudo')->nullable();
+            $table->string('imagem')->nullable();
             $table->enum('status', [
+                'producao',
                 'aprovado',
                 'rejeitado',
                 'pendente',
