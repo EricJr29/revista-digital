@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
                 'foto' => null,
                 'bio' => null,
                 'permissao' => 1,
-                'created_at' => now(), // DB::table precisa que a gente passe as datas manualmente
+                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
