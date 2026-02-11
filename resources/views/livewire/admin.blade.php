@@ -64,6 +64,13 @@
                         <div class="card h-100 border-0 shadow-sm hover-shadow transition" style="min-height: 200px;">
                             @if($post->imagem)
                             <img src="{{ asset('storage/' . $post->imagem) }}" class="card-img-top rounded-top" style="height: 120px; object-fit: cover;">
+                            @elseif($post->categoria)
+                            <img src="{{ asset('img/categorias/default_' . $post->categoria->nome . '.jpg') }}"
+                                class="card-img-top rounded-top"
+                                style="height: 120px; object-fit: cover;"
+                                alt="{{ $post->categoria->nome }}">
+                            @else
+                            <img src="{{ asset('img/default.jpg') }}" class="card-img-top rounded-top" style="height: 120px; object-fit: cover;">
                             @endif
 
                             <div class="card-body d-flex flex-column justify-content-center text-center">

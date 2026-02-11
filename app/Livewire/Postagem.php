@@ -25,7 +25,7 @@ class Postagem extends Component
 
         $this->titulo = $postagem->titulo;
         $this->subtitulo = $postagem->subtitulo;
-        $this->categoria = $postagem->categoria;
+        $this->categoria = $postagem->categoria_id;
         $this->conteudo = $postagem->conteudo;
         $this->status = $postagem->status;
     }
@@ -44,7 +44,7 @@ class Postagem extends Component
         ]);
         session()->flash('message', 'Projeto enviado com sucesso!');
 
-        return redirect()->route(Auth::user()->permissao == 3 ? 'admin.dashboard' : 'perfil');
+        return redirect()->route(Auth::user()->permissao == 3 ? 'admin.dashboard' : 'profile');
     }
 
     public function updatedTitulo($value)
@@ -57,7 +57,7 @@ class Postagem extends Component
     }
     public function updatedCategoria($value)
     {
-        $this->saveField('categoria', $value);
+        $this->saveField('categoria_id', $value);
     }
     public function updatedConteudo($value)
     {

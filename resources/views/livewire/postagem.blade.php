@@ -1,5 +1,12 @@
 @php
+
+    $rotaDestino = match(Auth::user()->permissao) {
+        3 => 'admin.dashboard',
+        2 => 'professor.dashboard',
+        1 => 'profile',
+    };
 $bloqueado = !in_array($status, ['producao', 'revisao']);
+
 @endphp
 
 <div class="container-fluid shadow-lg p-0"
@@ -64,7 +71,7 @@ $bloqueado = !in_array($status, ['producao', 'revisao']);
                         </div>
 
                         <div class="d-flex justify-content-end mt-4 gap-2">
-                            <a href="{{ route(Auth::user()->permissao == 3 ? 'admin.dashboard' : 'perfil') }}" class="btn btn-outline-secondary px-4 rounded-pill">Sair e Salvar</a>
+                            <a href="{{ route($rotaDestino) }}" class="btn btn-outline-secondary px-4 rounded-pill">Sair e Salvar</a>
                             @if(!$bloqueado)
                             <button type="button" class="btn btn-primary px-5 rounded-pill shadow"
                                 wire:click="finalizar"

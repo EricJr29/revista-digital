@@ -61,6 +61,17 @@ class PostagemController extends Controller
         return view('auth.postagem', compact('user', 'postagem', 'categorias'));
     }
 
+    public function validar($id)
+    {
+        $user = Auth::user();
+
+        $postagem = Postagem::where('id', $id)
+            ->firstOrFail(); 
+
+        $categorias = Categoria::all();
+        return view('auth.postagem', compact('user', 'postagem', 'categorias'));
+    }
+
     /**
      * Update the specified resource in storage.
      */

@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('titulo')->nullable();
             $table->string('subtitulo')->nullable();
             $table->foreignId('categoria_id')
-                ->constrained('categorais')
+                ->default(1)
+                ->constrained('categorias')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->text('conteudo')->nullable();
@@ -28,7 +29,6 @@ return new class extends Migration
             $table->enum('status', [
                 'producao',
                 'aprovado',
-                'rejeitado',
                 'pendente',
                 'revisao',
             ]);

@@ -1,3 +1,13 @@
+@auth
+@php
+$rotaDestino = match(Auth::user()->permissao) {
+3 => 'admin.dashboard',
+2 => 'professor.dashboard',
+1 => 'profile',
+};
+@endphp
+@endauth
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -7,7 +17,7 @@
     <title>Home</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
+
     <style>
         .navbar-brand-techflow {
             font-size: 1.8rem;
@@ -34,13 +44,14 @@
         .nav-link {
             transition: all .2s linear;
         }
+
         .nav-link:hover {
             scale: 1.1;
             color: #667eea;
         }
-        
+
         @stack('style');
-        </style>
+    </style>
 
 </head>
 
@@ -71,7 +82,7 @@
                             {{ Auth::user()->name ?? 'Usuário' }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ Auth::user()->permissao == 3 ? route('admin.dashboard') : route('profile') }}">Meu Perfil</a></li>
+                            <li><a class="dropdown-item" href="{{ route($rotaDestino) }}">Meu Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
