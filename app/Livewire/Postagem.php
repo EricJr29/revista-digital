@@ -3,7 +3,8 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Postagem as PostagemModel; // Importe o model corretamente
+use App\Models\Postagem as PostagemModel;
+use Illuminate\Support\Facades\Auth;
 
 class Postagem extends Component
 {
@@ -39,11 +40,11 @@ class Postagem extends Component
     public function finalizar()
     {
         PostagemModel::where('id', $this->postagem_id)->update([
-            'status' => 'pendente'
+            'status' => Auth::user()->permissao >= 2 ? 'aprovado' : 'pendente' ,
         ]);
         session()->flash('message', 'Projeto enviado com sucesso!');
 
-        return redirect()->route('profile');
+        return redirect()->route(Auth::user()->permissao == 3 ? 'admin.dashboard' : 'perfil');
     }
 
     public function updatedTitulo($value)

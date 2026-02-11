@@ -57,15 +57,7 @@
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav me-auto mb-5 mb-lg-1 gap-4 fs-5">
-                    <li class="nav-item ms-4">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
+                    @yield('nav_itens')
                 </ul>
 
                 @guest
@@ -79,7 +71,7 @@
                             {{ Auth::user()->name ?? 'Usuário' }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ route('profile') }}">Meu Perfil</a></li>
+                            <li><a class="dropdown-item" href="{{ Auth::user()->permissao == 3 ? route('admin.dashboard') : route('profile') }}">Meu Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

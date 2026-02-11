@@ -4,9 +4,12 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostagemController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () { return view('home'); });
-Route::get('/home', function () { return view('home'); });
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index']); 
+Route::get('/home/{id}', [HomeController::class, 'show'])->name('home.get'); 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
@@ -17,4 +20,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/postagem', [PostagemController::class, 'store'])->name('postagem');
     Route::get('/postagem/{id}', [PostagemController::class, 'edit'])->name('postagem.edit');
+    Route::get('/adm', [AdminController::class, 'index'])->name('admin.dashboard');
 });

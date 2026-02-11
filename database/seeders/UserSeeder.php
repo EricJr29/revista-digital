@@ -31,6 +31,16 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'adm',
+                'email' => 'adm@gmail.com',
+                'password' => Hash::make('adm123'),
+                'foto' => null,
+                'bio' => null,
+                'permissao' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         // Aqui está a mágica: DB em vez de User::create

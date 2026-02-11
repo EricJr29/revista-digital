@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Models\Categoria;
+use App\Models\Postagem;
 
-class CategoriaController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $categorias = Categoria::all();
+        $postagens = Postagem::all();
+        return view('home', compact('categorias', 'postagens'));
     }
 
     /**
@@ -34,15 +37,17 @@ class CategoriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Categoria $categoria)
+    public function show(string $id)
     {
-        //
+        $categorias = Categoria::all();
+        $postagens = Postagem::where('categoria_id', $id);
+        return view('home', compact('categorias', 'postagens'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categoria $categoria)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +55,7 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +63,7 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(string $id)
     {
         //
     }

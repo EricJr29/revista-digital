@@ -19,7 +19,10 @@ return new class extends Migration
                 ->onUpdate('cascade');
             $table->string('titulo')->nullable();
             $table->string('subtitulo')->nullable();
-            $table->string('categoria')->nullable();
+            $table->foreignId('categoria_id')
+                ->constrained('categorais')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->text('conteudo')->nullable();
             $table->string('imagem')->nullable();
             $table->enum('status', [

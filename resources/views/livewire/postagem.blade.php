@@ -56,7 +56,7 @@ $bloqueado = !in_array($status, ['producao', 'revisao']);
                             </div>
 
                             <div class="col-12 mt-4">
-                                <div class="border border-2 border-dashed rounded-3 p-5 text-center text-muted">
+                                <div class="border-dashed rounded-3 p-5 text-center text-muted">
                                     <i class="bi bi-image fs-1"></i>
                                     <p class="mb-0">Clique para subir uma capa (Em breve)</p>
                                 </div>
@@ -64,7 +64,7 @@ $bloqueado = !in_array($status, ['producao', 'revisao']);
                         </div>
 
                         <div class="d-flex justify-content-end mt-4 gap-2">
-                            <a href="{{ route('profile') }}" class="btn btn-outline-secondary px-4 rounded-pill">Sair e Salvar</a>
+                            <a href="{{ route(Auth::user()->permissao == 3 ? 'admin.dashboard' : 'perfil') }}" class="btn btn-outline-secondary px-4 rounded-pill">Sair e Salvar</a>
                             @if(!$bloqueado)
                             <button type="button" class="btn btn-primary px-5 rounded-pill shadow"
                                 wire:click="finalizar"

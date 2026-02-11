@@ -60,11 +60,10 @@ class LoginController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'permissao' => 0, 
         ]);
 
-        Auth::login($user);
-
-        return redirect('/home')->with('success', 'Conta criada com sucesso!');
+        return redirect('/login')->with('info', 'Sua conta foi criada! Aguarde a aprovação de um administrador para acessar.');
     }
 
     /**
