@@ -8,9 +8,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfessorController;
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index']); 
-Route::get('/home/{id}', [HomeController::class, 'show'])->name('home.get'); 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/{id}', [HomeController::class, 'show'])->name('home.get');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
@@ -20,8 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/perfil', [ProfileController::class, 'index'])->name('profile');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/postagem', [PostagemController::class, 'store'])->name('postagem');
-    Route::get('/postagem/{id}', [PostagemController::class, 'edit'])->name('postagem.edit');
-    Route::get('/postagem/{id}', [PostagemController::class, 'validar'])->name('postagem.validar');
+    Route::get('/postagem/editar/{id}', [PostagemController::class, 'edit'])->name('postagem.edit');
+    Route::get('/postagem/validar/{id}', [PostagemController::class, 'validar'])->name('postagem.validar');
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/professor', [ProfessorController::class, 'index'])->name('professor.dashboard');
 });
