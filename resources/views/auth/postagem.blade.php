@@ -1,5 +1,7 @@
 @extends('layout.base')
 
+@section('tittle', 'Criar Postagem')
+
 @push('style')
 body {
 background-attachment: fixed;

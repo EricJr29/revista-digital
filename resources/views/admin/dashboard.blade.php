@@ -16,6 +16,8 @@ margin: 0;
 }
 @endpush
 
+@section('tittle', 'Perfil')
+
 @section('conteudo')
 
 @livewire('admin', [

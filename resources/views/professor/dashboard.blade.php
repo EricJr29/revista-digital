@@ -1,5 +1,7 @@
 @extends('layout.base')
 
+@section('tittle', 'Perfil')
+
 @push('style')
 body {
 background-attachment: fixed;
