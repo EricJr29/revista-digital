@@ -1,10 +1,10 @@
 @php
 
-    $rotaDestino = match(Auth::user()->permissao) {
-        3 => 'admin.dashboard',
-        2 => 'professor.dashboard',
-        1 => 'profile',
-    };
+$rotaDestino = match(Auth::user()->permissao) {
+3 => 'admin.dashboard',
+2 => 'professor.dashboard',
+1 => 'profile',
+};
 $bloqueado = !in_array($status, ['producao', 'revisao']);
 
 @endphp

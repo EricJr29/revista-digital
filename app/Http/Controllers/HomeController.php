@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Postagem;
+use App\Models\Like;
 
 class HomeController extends Controller
 {
@@ -37,11 +38,18 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         $categorias = Categoria::all();
-        $postagens = Postagem::where('categoria_id', $id);
+        $postagens = Postagem::where('categoria_id', $id)->get();
         return view('home', compact('categorias', 'postagens'));
+    }
+
+    public function visualizar($id)
+    {
+        $postagem = Postagem::where('id', $id)->get()->firstOrFail();
+        $likes = Like::where('postagem_id', $postagem->id)->get();
+        return view('visualizar', compact('postagem', 'likes'));
     }
 
     /**

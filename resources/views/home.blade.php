@@ -8,6 +8,10 @@
         Categorias
     </a>
     <ul class="dropdown-menu">
+        <li><a class="dropdown-item fw-bold" href="{{ route('home') }}">Todas as Categorias</a></li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
         @foreach($categorias as $categoria)
         <li><a class="dropdown-item" href="{{ route('home.get', ['id' => $categoria->id]) }}">{{$categoria->nome}}</a></li>
         @endforeach
@@ -31,7 +35,7 @@
 
                 <div class="carousel-inner">
                     @foreach($postagens->take(3) as $key => $post)
-                    <a href='' class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                    <a href="{{ route('postagem.visualizar', ['id' => $post->id]) }}" class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                         <img src="{{ asset($post->imagem ?? 'img/Categorias/default.jpg') }}" class="d-block w-100" style="height: 400px; object-fit: cover;">
                         <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3">
                             <h5>{{ $post->titulo }}</h5>
@@ -93,12 +97,12 @@
     <div class="row">
         @foreach($postagens->skip(3) as $post)
         <div class="col-md-4">
-            <div class="card">
+            <a href="{{ route('postagem.visualizar', ['id' => $post->id]) }}" class="card">
                 <img src="{{ asset($post->imagem ?? 'img/default.jpg') }}" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">{{ $post->titulo }}</h5>
                 </div>
-            </div>
+            </a>
         </div>
         @endforeach
     </div>

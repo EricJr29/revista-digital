@@ -28,22 +28,28 @@
             <div class=" col-sm-6 col-md-8 mt-4 px-4 text-center">
                 <div class="mb-4">
                     <h5 class="fw-bold">PROJETOS</h5>
+                    <select class="form-select border-0 shadow w-25" wire:model.live="status">
+                        <option value="todos">Todos</option>
+                        <option value="producao">Produção</option>
+                        <option value="aprovado">Aprovado</option>
+                        <option value="pendente">Pendente</option>
+                        <option value="revisao">Revisão</option>
+                    </select>
                 </div>
-
-                <div class="row">
+                <div class="row flex-grow-1 overflow-y-auto" style="height:55vh;">
                     @foreach($postagens as $post)
                     <div class="col-md-6 mb-4" wire:key="post-{{ $post->id }}">
-                        <a href="{{ route('postagem.edit', ['id' => $post->id]) }}" class="text-decoration-none">
+                        <a href="{{ $post->status == 'aprovado' ? route('postagem.visualizar', ['id' => $post->id]) : route('postagem.edit', ['id' => $post->id]) }}" class="text-decoration-none">
                             <div class="card h-100 border-0 shadow-sm hover-shadow transition" style="min-height: 200px;">
                                 @if($post->imagem)
-                                <img src="{{ asset('storage/' . $post->imagem) }}" class="card-img-top rounded-top" style="height: 120px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $post->imagem) }}" class="card-img-top rounded-top" style="height: 140px; object-fit: cover;">
                                 @elseif($post->categoria)
                                 <img src="{{ asset('img/categorias/default_' . $post->categoria->nome . '.jpg') }}"
                                     class="card-img-top rounded-top"
-                                    style="height: 120px; object-fit: cover;"
+                                    style="height: 140px; object-fit: cover;"
                                     alt="{{ $post->categoria->nome }}">
                                 @else
-                                <img src="{{ asset('img/default.jpg') }}" class="card-img-top rounded-top" style="height: 120px; object-fit: cover;">
+                                <img src="{{ asset('img/default.jpg') }}" class="card-img-top rounded-top" style="height: 140px; object-fit: cover;">
                                 @endif
 
                                 <div class="card-body d-flex flex-column justify-content-center text-center">
