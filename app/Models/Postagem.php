@@ -13,12 +13,16 @@ class Postagem extends Model
         'usuario_id',
         'categoria_id',
         'status',
-        'titulo',      
+        'titulo',
         'conteudo',
         'imagem',
     ];
     public function categoria(): BelongsTo
     {
         return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'usuario_id');
     }
 }

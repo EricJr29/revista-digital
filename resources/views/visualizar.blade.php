@@ -4,7 +4,7 @@
 
 @section('conteudo')
 
-@livewire('visualizar', [
+@livewire('visualizar-postagem', [
     'postagem' => $postagem,
     'likes' => $likes,
 ])

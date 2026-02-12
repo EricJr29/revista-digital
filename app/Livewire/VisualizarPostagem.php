@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Livewire;
+
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+use App\Models\Like;
+
+class VisualizarPostagem extends Component
+{
+    public $postagem;
+    public $likes_count;
+    public $seu_like = false;
+
+    public function mount($postagem, $likes)
+    {
+        $this->postagem = $postagem;
+        $this->likes_count = $likes->count();
+
+        if (Auth::check()) {
+            $this->seu_like = $likes->contains('user_id', Auth::id());
+        }
+    }
+
+    public function updateLike()
+    {
+        if (!Auth::check()) return redirect()->route('login');
+
+        if ($this->seu_like) {
+            Like::where('user_id', Auth::id())
+                ->where('postagem_id', $this->postagem->id)
+                ->delete();
+
+            $this->seu_like = false;
+            $this->likes_count--;
+        } else {
+            Like::create([
+                'user_id' => Auth::id(),
+                'postagem_id' => $this->postagem->id,
+            ]);
+
+            $this->seu_like = true;
+            $this->likes_count++;
+        }
+    }
+
+    public function render()
+    {
+        return view('livewire.visualizar-postagem');
+    }
+}
