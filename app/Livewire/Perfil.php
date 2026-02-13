@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Postagem;
+use App\Models\Like;
 
 class Perfil extends Component
 {
@@ -12,6 +13,7 @@ class Perfil extends Component
     public $postagens;
     public $bio;
     public $status;
+    public $todosLikes;
 
     public function mount($user, $seguidores, $postagens)
     {
@@ -20,6 +22,9 @@ class Perfil extends Component
         $this->postagens = $postagens;
         $this->bio = $user->bio;
         $this->status = 'todos';
+
+        $postIds = $postagens->pluck('id');
+        $this->todosLikes = Like::whereIn('postagem_id', $postIds)->get();
     }
 
     public function updatedStatus($value)
@@ -31,7 +36,6 @@ class Perfil extends Component
         }
 
         $this->postagens = $query->get();
-        
     }
 
     public function updatedBio($value)

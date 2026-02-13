@@ -63,9 +63,68 @@ $bloqueado = !in_array($status, ['producao', 'revisao']);
                             </div>
 
                             <div class="col-12 mt-4">
-                                <div class="border-dashed rounded-3 p-5 text-center text-muted">
-                                    <i class="bi bi-image fs-1"></i>
-                                    <p class="mb-0">Clique para subir uma capa (Em breve)</p>
+                                <div class="card border-0 shadow-sm overflow-hidden rounded-4">
+                                    <div class="card-header bg-white border-0 py-3">
+                                        <h6 class="mb-0 fw-bold text-muted">Capa do Projeto</h6>
+                                    </div>
+
+                                    <div class="card-body p-4 bg-light">
+                                        @if ($capa)
+                                        <div class="text-center">
+                                            <div class="position-relative d-inline-block">
+                                                <img src="{{ $capa->temporaryUrl() }}" class="img-fluid rounded-3 shadow" style="max-height: 250px; border: 3px solid #fff;">
+                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                                                    Novo
+                                                </span>
+                                            </div>
+
+                                            <div class="mt-3 d-flex justify-content-center gap-2">
+                                                <button type="button" wire:click="salvarCapa" class="btn btn-success px-4 rounded-pill fw-bold shadow-sm">
+                                                    <i class="bi bi-cloud-arrow-up-fill me-2"></i>Salvar Nova Capa
+                                                </button>
+                                                <button type="button" wire:click="$set('capa', null)" class="btn btn-light px-4 rounded-pill border">
+                                                    Cancelar
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        @elseif($imagem)
+                                        <div class="text-center">
+                                            <img src="{{ asset('storage/' . $imagem) }}" class="img-fluid rounded-3 shadow-sm mb-3" style="max-height: 200px;">
+                                            <div class="d-block">
+                                                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill px-3" onclick="document.getElementById('inputCapa').click()">
+                                                    <i class="bi bi-arrow-left-right me-1"></i> Alterar Imagem
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        @else
+                                        <div class="border-dashed rounded-4 p-5 text-center text-muted"
+                                            style="border: 2px dashed #cbd5e0; cursor: pointer; transition: all 0.3s;"
+                                            onmouseover="this.style.backgroundColor='#edf2f7'"
+                                            onmouseout="this.style.backgroundColor='transparent'"
+                                            onclick="document.getElementById('inputCapa').click()">
+
+                                            <i class="bi bi-image-fill fs-1 text-secondary"></i>
+                                            <p class="mt-2 fw-medium">Nenhuma capa definida</p>
+                                            <span class="btn btn-sm btn-primary rounded-pill px-4">Selecionar Foto</span>
+                                        </div>
+                                        @endif
+
+                                        <input type="file" id="inputCapa" wire:model.live="capa" class="d-none" accept="image/*">
+
+                                        <div wire:loading wire:target="capa" class="mt-3 text-center">
+                                            <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+                                            <span class="ms-2 text-primary fw-bold small">Processando arquivo...</span>
+                                        </div>
+
+                                        @error('capa')
+                                        <div class="alert alert-danger d-flex align-items-center mt-3 mb-0 py-2">
+                                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                            <span class="small">{{ $message }}</span>
+                                        </div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>

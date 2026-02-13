@@ -1,23 +1,8 @@
-@php
-$corCategoria = match($postagem->categoria_id) {
-1 => '#007bff',
-2 => '#e83e8c',
-3 => '#8b4513',
-4 => '#28a745',
-5 => '#fd7e14',
-6 => '#6f42c1',
-7 => '#dc3545',
-8 => '#17a2b8',
-default => '#6c757d'
-};
-@endphp
-
-
 <div class="container-fluid  py-5" style="width: 85%;">
 
     <div class="row ">
         <div class="col-lg-9 w-100">
-            <span class="d-block fw-bold text-center mb-1" style="color: {{$corCategoria}} ;">{{ $postagem->categoria->nome }}</span>
+            <span class="d-block fw-bold text-center mb-1" style="color: var(--cor-tema) ;">{{ $postagem->categoria->nome }}</span>
             <h1 class="display-5 fw-bold text-dark m-0 text-center">
                 {{ $postagem->titulo ?? 'Sem título' }}
             </h1>

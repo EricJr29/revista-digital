@@ -50,8 +50,8 @@ $rotaDestino = match(Auth::user()->permissao) {
             color: #667eea;
         }
 
-        @stack('style');
-    </style>
+        </style>
+        @stack('style')
 
 </head>
 

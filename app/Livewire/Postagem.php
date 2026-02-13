@@ -5,9 +5,13 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Postagem as PostagemModel;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class Postagem extends Component
 {
+    use WithFileUploads;
+
     public $user;
     public $postagem_id;
     public $titulo;
@@ -16,18 +20,50 @@ class Postagem extends Component
     public $conteudo;
     public $status;
     public $categorias;
+    public $capa;
+    public $postagem;
+    public $imagem;
 
     public function mount($user, $postagem, $categorias)
     {
         $this->user = $user;
         $this->categorias = $categorias;
-        $this->postagem_id = $postagem->id;
+        $this->postagem = $postagem;
 
+        $this->postagem_id = $postagem->id;
         $this->titulo = $postagem->titulo;
         $this->subtitulo = $postagem->subtitulo;
         $this->categoria = $postagem->categoria_id;
         $this->conteudo = $postagem->conteudo;
         $this->status = $postagem->status;
+        $this->imagem = $postagem->imagem;
+    }
+
+    public function salvarCapa()
+    {
+        $this->validate([
+            'capa' => 'required|image|max:2048',
+        ]);
+
+        if ($this->imagem) {
+            Storage::disk('public')->delete($this->imagem);
+        }
+
+        $caminho = $this->capa->store('postagens', 'public');
+
+        $post = PostagemModel::find($this->postagem_id);
+
+        if ($post) {
+            $post->update([
+                'imagem' => $caminho
+            ]);
+
+            $this->imagem = $caminho; 
+            $this->postagem = $post->fresh();
+            $this->reset('capa'); 
+
+            session()->flash('message', 'Capa atualizada com sucesso!');
+        }
     }
 
     public function saveField($field, $value)
@@ -40,7 +76,7 @@ class Postagem extends Component
     public function finalizar()
     {
         PostagemModel::where('id', $this->postagem_id)->update([
-            'status' => Auth::user()->permissao >= 2 ? 'aprovado' : 'pendente' ,
+            'status' => Auth::user()->permissao >= 2 ? 'aprovado' : 'pendente',
         ]);
         session()->flash('message', 'Projeto enviado com sucesso!');
 
