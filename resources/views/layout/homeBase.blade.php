@@ -17,6 +17,7 @@ $rotaDestino = match(Auth::user()->permissao) {
     <title>@yield('tittle')</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
         .navbar-brand-techflow {
@@ -50,8 +51,11 @@ $rotaDestino = match(Auth::user()->permissao) {
             color: #667eea;
         }
 
-        @stack('style');
+        footer {
+            font-family: 'Rajdhani', sans-serif;
+        }
     </style>
+    @stack('style')
 
 </head>
 

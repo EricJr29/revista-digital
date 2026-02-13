@@ -5,12 +5,14 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\Like;
+use App\Models\Postagem;
 
 class VisualizarPostagem extends Component
 {
     public $postagem;
     public $likes_count;
     public $seu_like = false;
+    public $relacionados;
 
     public function mount($postagem, $likes)
     {
@@ -20,6 +22,11 @@ class VisualizarPostagem extends Component
         if (Auth::check()) {
             $this->seu_like = $likes->contains('user_id', Auth::id());
         }
+
+        $this->relacionados = Postagem::where('status', 'aprovado')
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
     }
 
     public function updateLike()
