@@ -10,8 +10,13 @@
             <p class="lead fs-3 text-muted m-0 text-center">
                 {{ $postagem->subtitulo }}
             </p>
-            <p class="fs-5  m-0 text-center">
-                <span class="d-block fw-bold text-dark">Por {{ $postagem->user->name }}</span>
+            <p class="fs-5 m-0 text-center">
+                {{-- Link adicionado aqui --}}
+                <span class="d-block fw-bold text-dark">
+                    <a href="{{ route('profile.visualizar', ['id' => $postagem->user->id]) }}" class="text-decoration-none text-dark">
+                        Por {{ $postagem->user->name }}
+                    </a>
+                </span>
                 <small class="text-muted">
                     {{ $postagem->created_at->locale('pt_BR')->diffForHumans() }}
                 </small>
@@ -72,7 +77,12 @@
         </div>
         <div class="d-flex align-items-center mb-4 border-top py-3">
             <div>
-                <span class="d-block fw-bold text-dark">Por {{ $postagem->user->name }}</span>
+                {{-- Link adicionado aqui também --}}
+                <span class="d-block fw-bold text-dark">
+                    <a href="{{ route('profile.visualizar', ['id' => $postagem->user->id]) }}" class="text-decoration-none text-dark">
+                        Por {{ $postagem->user->name }}
+                    </a>
+                </span>
                 <small class="text-muted">
                     {{ $postagem->created_at->locale('pt_BR')->diffForHumans() }}
                 </small>

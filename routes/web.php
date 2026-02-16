@@ -12,6 +12,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/home/{id}', [HomeController::class, 'show'])->name('home.get');
 Route::get('/home/visualizar/{id}', [HomeController::class, 'visualizar'])->name('postagem.visualizar');
+Route::get('/perfil/visualizar/{id}', [ProfileController::class, 'visualizar'])->name('profile.visualizar');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
