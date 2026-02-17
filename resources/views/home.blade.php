@@ -112,7 +112,7 @@
                             <i class="bi bi-file-earmark-post fs-5"></i>
                         </div>
                         <div>
-                            <span class="d-block fw-bold fs-5">{{ $postagens->count() }}</span>
+                            <span class="d-block fw-bold fs-5">{{ $estatisticas->count() }}</span>
                             <small class="text-muted">Postagens Realizadas</small>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         @foreach($categorias as $categoria)
                         <div class="d-flex align-items-center mb-3">
                             <div class="icon-box bg-primary-subtle text-primary rounded-pill d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; min-width: 40px;">
-                                <span class="fw-bold small">{{ $postagens->where('categoria_id', $categoria->id)->count() }}</span>
+                                <span class="fw-bold small">{{ $estatisticas->where('categoria_id', $categoria->id)->count() }}</span>
                             </div>
                             <div>
                                 <h6 class="mb-0 fw-bold fs-6">{{ $categoria->nome }}</h6>

@@ -16,7 +16,8 @@ class HomeController extends Controller
     {
         $categorias = Categoria::all();
         $postagens = Postagem::where('status', 'aprovado')->get();
-        return view('home', compact('categorias', 'postagens'));
+        $estatisticas = Postagem::where('status', 'aprovado')->get();
+        return view('home', compact('categorias', 'postagens', 'estatisticas'));
     }
 
     /**
@@ -41,8 +42,9 @@ class HomeController extends Controller
     public function show($id)
     {
         $categorias = Categoria::all();
-        $postagens = Postagem::where('categoria_id', $id)->get();
-        return view('home', compact('categorias', 'postagens'));
+        $estatisticas = Postagem::where('status', 'aprovado')->get();
+        $postagens = Postagem::where('categoria_id', $id)->where('status', 'arpovado')->get();
+        return view('home', compact('categorias', 'postagens', 'estatisticas'));
     }
 
     public function visualizar($id)
