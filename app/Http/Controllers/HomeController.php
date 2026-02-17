@@ -52,6 +52,26 @@ class HomeController extends Controller
         return view('visualizar', compact('postagem', 'likes'));
     }
 
+    public function pesquisa(Request $request)
+    {
+        $termo = $request->input('busca');
+        $categoria_id = $request->input('categoria');
+
+        $resultados = Postagem::where('status', 'aprovado')
+            ->where(function ($query) use ($termo) {
+                $query->where('titulo', 'like', "%{$termo}%")
+                    ->orWhere('subtitulo', 'like', "%{$termo}%");
+            })
+            ->when($categoria_id, function ($query, $categoria_id) {
+                return $query->where('categoria_id', $categoria_id);
+            })
+            ->get();
+
+        $categorias = Categoria::all();
+
+        return view('pesquisa', compact('resultados', 'termo', 'categorias'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

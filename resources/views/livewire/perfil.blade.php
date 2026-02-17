@@ -11,6 +11,7 @@
                         style="width: 120px; height: 120px; margin-top: -70px; object-fit: cover; border: 4px solid white;">
 
                     <h4 class="mt-3 fw-bold text-center" style="font-family: 'Rajdhani', sans-serif;">{{$user->name}}</h4>
+                    <p class="text-center text-primary small fw-bold mt-n2">ALUNO</p>
 
                     <div class="d-flex justify-content-around mt-3">
                         <div class="text-center">

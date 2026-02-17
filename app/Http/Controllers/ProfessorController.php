@@ -14,6 +14,7 @@ class ProfessorController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->permissao != 2) redirect()->route('home')->with('error', 'Sem permissão!');
         $user = Auth::user();
         $postagens = Postagem::where('usuario_id', $user->id)->get();
         $postagens_pendentes = Postagem::where('status', 'pendente')->get();

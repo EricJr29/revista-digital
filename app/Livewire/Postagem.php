@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Categoria;
 use Livewire\Component;
 use App\Models\Postagem as PostagemModel;
 use Illuminate\Support\Facades\Auth;
@@ -74,14 +75,26 @@ class Postagem extends Component
     }
 
     public function finalizar()
-    {
-        PostagemModel::where('id', $this->postagem_id)->update([
-            'status' => Auth::user()->permissao >= 2 ? 'aprovado' : 'pendente',
-        ]);
-        session()->flash('message', 'Projeto enviado com sucesso!');
+{
+    $post = PostagemModel::find($this->postagem_id);
 
-        return redirect()->route(Auth::user()->permissao == 3 ? 'admin.dashboard' : 'profile');
+    if (!$post->imagem && $post->categoria_id) {
+        $nomeCategoria = Categoria::find($post->categoria_id)->nome;
+        $caminhoDefault = 'img/categorias/default_' . $nomeCategoria . '.jpg';
+        
+        $post->update([
+            'imagem' => $caminhoDefault
+        ]);
     }
+
+    $post->update([
+        'status' => Auth::user()->permissao >= 2 ? 'aprovado' : 'pendente',
+    ]);
+
+    session()->flash('message', 'Projeto enviado com sucesso!');
+
+    return redirect()->route(Auth::user()->permissao == 3 ? 'admin.dashboard' : 'profile');
+}
 
     public function updatedTitulo($value)
     {

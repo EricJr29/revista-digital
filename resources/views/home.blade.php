@@ -3,6 +3,9 @@
 @section('tittle', 'Home')
 
 @section('nav_itens')
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+</li>
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Categorias
@@ -20,12 +23,45 @@
 
 @endsection
 
+@section('navbar')
+
+<nav class="navbar navbar-expand-lg py-1 shadow-sm" style="background-color: #0085a5;">
+    <div class="container-fluid px-lg-5">
+
+        <div class="collapse navbar-collapse" id="subNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-wrap">
+                @foreach($categorias as $c)
+                <li class="nav-item">
+                    <a class="text-white nav-link fw-semibold small pe-3 border-end border-white border-opacity-25" href="{{ route('home.get', ['id' => $c->id]) }}">{{ $c->nome }}</a>
+                </li>
+                @endforeach
+            </ul>
+
+            <form action="{{ route('pesquisa') }}" method="GET" class="d-flex ms-auto my-1" style="max-width: 400px;">
+                <div class="input-group input-group-sm">
+                    <input type="text" name="busca" class="form-control border-0" placeholder="Buscar no TechFlow..." aria-label="Buscar">
+                    <button class="btn btn-primary btn-sm px-3 fw-bold" type="submit" style="background-color: #007bff;">
+                        Buscar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#subNavbar">
+            <i class="bi bi-search"></i>
+        </button>
+    </div>
+</nav>
+
+@endsection
+
 @section('conteudo')
 
-<div class="container-fluid w-75">
+<div class="container-fluid w-75 mt-5">
     <div class="row w-100 align-items-stretch">
 
         <div class="col-lg-8">
+            @if($postagens->isNotEmpty())
             <div id="TopPostagens" class="carousel slide shadow-sm rounded-4 overflow-hidden">
                 <div class="carousel-indicators">
                     @foreach($postagens->take(3) as $key => $post)
@@ -54,6 +90,14 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+            @else
+
+            <div class="text-center d-flex flex-column py-5 align-items-center justify-content-center" style="min-height: 400px;">
+                <i class="bi bi-emoji-frown display-4 text-muted"></i>
+                <p class="mt-3 fs-5">Nenhuma Postagem Encontrada.</p>
+            </div>
+
+            @endif
         </div>
 
         <div class="col-lg-4">

@@ -111,7 +111,7 @@ $bloqueado = !in_array($status, ['producao', 'revisao']);
                                         </div>
                                         @endif
 
-                                        <input type="file" id="inputCapa" wire:model.live="capa" class="d-none" accept="image/*">
+                                        <input {{ $bloqueado ? 'disabled' : '' }} type="file" id="inputCapa" wire:model.live="capa" class="d-none" accept="image/*">
 
                                         <div wire:loading wire:target="capa" class="mt-3 text-center">
                                             <div class="spinner-border spinner-border-sm text-primary" role="status"></div>

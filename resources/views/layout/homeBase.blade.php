@@ -61,7 +61,7 @@ $rotaDestino = match(Auth::user()->permissao) {
 
 <body>
 
-    <nav class="mb-3 navbar navbar-expand-lg border-bottom border-gray-950 border-body shadow bg-white">
+    <nav class=" navbar navbar1 navbar-expand-lg border-bottom border-gray-950 border-body shadow bg-white">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <span class="navbar-brand-techflow">TechFlow</span>
@@ -104,6 +104,7 @@ $rotaDestino = match(Auth::user()->permissao) {
             </div>
         </div>
     </nav>
+    @yield('navbar')
 
     @yield('conteudo')
 

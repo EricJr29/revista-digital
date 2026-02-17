@@ -16,6 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->permissao != 3) redirect()->route('home')->with('error', 'Sem permissão!');
         $user = Auth::user();
         $avaliar = User::where('permissao', 0)->get();
         $postagens = Postagem::where('usuario_id', $user->id)->get();
