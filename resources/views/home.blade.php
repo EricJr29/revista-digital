@@ -137,12 +137,12 @@
     </div>
 </div>
 
-<div class="container-fluid mt-5" style="width: 90%;">
+<div class="container-fluid mt-5 mb-5" style="width: 90%;">
     <div class="row">
         @foreach($postagens->skip(3) as $post)
-        <div class="col-md-4">
+        <div class="col-md-4 mb-5">
             <a href="{{ route('postagem.visualizar', ['id' => $post->id]) }}" class="card">
-                <img src="{{ asset($post->imagem ?? 'img/default.jpg') }}" class="card-img-top">
+                <img src="{{ asset($post->imagem ?? 'img/Categorias/default.jpg') }}" class="card-img-top overflow-hidden" style="height:100%; max-height:15rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ $post->titulo }}</h5>
                 </div>

@@ -23,9 +23,13 @@
             <hr class="my-5">
 
             @php
+            if (empty($postagem->imagem)) {
+            $finalUrl = asset('img/Categorias/default.jpg');
+            } else {
             $finalUrl = str_starts_with($postagem->imagem, 'img/')
             ? asset($postagem->imagem)
             : asset('storage/' . $postagem->imagem);
+            }
             @endphp
 
             <div class="row g-4">
@@ -117,9 +121,13 @@
                     <div class="mb-4">
                         <a href="{{ route('postagem.visualizar', $item->id) }}" class="text-decoration-none group">
                             @php
+                            if (empty($item->imagem)) {
+                            $imgRelacionado = asset('img/Categorias/default.jpg');
+                            } else {
                             $imgRelacionado = str_starts_with($item->imagem, 'img/')
                             ? asset($item->imagem)
                             : asset('storage/' . $item->imagem);
+                            }
                             @endphp
                             <img src="{{ $imgRelacionado }}" class="img-fluid rounded-2 mb-2 shadow-sm" style="height: 120px; width: 100%; object-fit: cover;">
 

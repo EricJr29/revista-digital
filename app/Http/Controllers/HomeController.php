@@ -16,8 +16,15 @@ class HomeController extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        $postagens = Postagem::where('status', 'aprovado')->get();
-        $estatisticas = Postagem::where('status', 'aprovado')->get();
+        
+        $postagens = Postagem::where('status', 'aprovado')
+            ->withCount('likes')
+            ->orderByDesc('likes_count')
+            ->get();
+
+        // Reaproveitando a variável para as estatísticas
+        $estatisticas = $postagens;
+
         return view('home', compact('categorias', 'postagens', 'estatisticas'));
     }
 
