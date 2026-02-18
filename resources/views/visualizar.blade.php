@@ -31,6 +31,7 @@ default => '#6c757d'
 @section('conteudo')
 
 @livewire('visualizar-postagem', [
+'comentarios' => $comentarios,
 'postagem' => $postagem,
 'likes' => $likes,
 ])

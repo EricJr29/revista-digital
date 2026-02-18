@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\Like;
 use App\Models\Postagem;
+use App\Models\Comentario;
 
 class VisualizarPostagem extends Component
 {
@@ -13,11 +14,14 @@ class VisualizarPostagem extends Component
     public $likes_count;
     public $seu_like = false;
     public $relacionados;
+    public $comentarios;
+    public $novoComentario;
 
-    public function mount($postagem, $likes)
+    public function mount($postagem, $likes, $comentarios)
     {
         $this->postagem = $postagem;
         $this->likes_count = $likes->count();
+        $this->comentarios = $comentarios;
 
         if (Auth::check()) {
             $this->seu_like = $likes->contains('user_id', Auth::id());
@@ -50,6 +54,20 @@ class VisualizarPostagem extends Component
             $this->likes_count++;
         }
     }
+
+    public function adicionarComentario()
+{
+    if (empty(trim($this->novoComentario))) return;
+
+    Comentario::create([
+        'postagem_id' => $this->postagem->id,
+        'user_id' => Auth::id(),
+        'conteudo' => $this->novoComentario
+    ]);
+    $this->comentarios = Comentario::where('postagem_id', $this->postagem->id)->get();
+
+    $this->reset('novoComentario');
+}
 
     public function render()
     {

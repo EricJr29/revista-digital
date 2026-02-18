@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Postagem;
 use App\Models\Like;
+use App\Models\Comentario;
 
 class HomeController extends Controller
 {
@@ -51,7 +52,8 @@ class HomeController extends Controller
     {
         $postagem = Postagem::where('id', $id)->get()->firstOrFail();
         $likes = Like::where('postagem_id', $postagem->id)->get();
-        return view('visualizar', compact('postagem', 'likes'));
+        $comentarios = Comentario::where('postagem_id', $id)->get();
+        return view('visualizar', compact('postagem', 'likes', 'comentarios'));
     }
 
     public function pesquisa(Request $request)
