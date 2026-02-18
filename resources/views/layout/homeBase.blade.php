@@ -87,6 +87,7 @@ $rotaDestino = match(Auth::user()->permissao) {
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="{{ route($rotaDestino) }}">Meu Perfil</a></li>
+                            <li><a class="dropdown-item" href="{{ route('amigos') }}">Amigos</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -108,7 +109,7 @@ $rotaDestino = match(Auth::user()->permissao) {
 
     @yield('conteudo')
 
-    <footer class="bg-dark text-white pt-5 pb-4 mt-5 shadow-lg" style="border-top: 4px solid #6f42c1;">
+    <footer class="bg-dark text-white pt-5 pb-4 shadow-lg" style="border-top: 4px solid #6f42c1;">
         <div class="container text-center text-md-start">
             <div class="row text-center text-md-start">
 

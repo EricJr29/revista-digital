@@ -83,6 +83,7 @@ $rotaDestino = match(Auth::user()->permissao) {
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="{{ route($rotaDestino) }}">Meu Perfil</a></li>
+                            <li><a class="dropdown-item" href="{{ route('amigos') }}">Amigos</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

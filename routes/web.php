@@ -7,6 +7,7 @@ use App\Http\Controllers\PostagemController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\SeguidoresController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -21,6 +22,8 @@ Route::post('/registrar', [LoginController::class, 'registrar'])->name('registra
 
 Route::middleware('auth')->group(function () {
     Route::get('/perfil', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/amigos', [SeguidoresController::class, 'index'])->name('amigos');
+    Route::get('/amigos/del/{id}', [SeguidoresController::class, 'destroy'])->name('delete.amigo');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/postagem', [PostagemController::class, 'store'])->name('postagem');
     Route::get('/postagem/editar/{id}', [PostagemController::class, 'edit'])->name('postagem.edit');

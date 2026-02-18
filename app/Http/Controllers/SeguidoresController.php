@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Seguidor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Seguidor;
 
-class SeguidorController extends Controller
+class SeguidoresController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $segue = Seguidor::where('user_id', $user->id)->get();
+        return view('auth.amigos', compact('user','segue'));
     }
 
     /**
@@ -34,7 +37,7 @@ class SeguidorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Seguidor $seguidor)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +45,7 @@ class SeguidorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Seguidor $seguidor)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +53,7 @@ class SeguidorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Seguidor $seguidor)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,8 +61,13 @@ class SeguidorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Seguidor $seguidor)
-    {
-        //
-    }
+    public function destroy($id)
+{
+    $user = Auth::user();
+    Seguidor::where('user_id', $user->id)
+            ->where('seguido_id', $id)
+            ->delete();
+
+    return redirect()->back()->with('success', 'Você deixou de seguir essa pessoa.');
+}
 }
