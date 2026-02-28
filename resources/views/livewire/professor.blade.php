@@ -6,10 +6,30 @@
 
             <div class="col-6 col-md-4" style="margin-top: -80px;">
                 <div class="card shadow-sm border-0 p-4 bg-white rounded-3 mb-4">
-                    <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('img/default-avatar.png') }}"
-                        class="rounded-circle mx-auto img-thumbnail shadow-sm"
-                        style="width: 120px; height: 120px; margin-top: -70px; object-fit: cover; border: 4px solid white;">
+                    <div class="position-relative d-inline-block mx-auto">
+                        <label for="upload-foto" class="position-relative" style="cursor: pointer;">
+                            @php
+                            $urlAvatar = $user->foto ? asset('storage/' . $user->foto) : asset('img/default-avatar.png');
+                            if ($novaFoto) { $urlAvatar = $novaFoto->temporaryUrl(); }
+                            @endphp
 
+                            <img src="{{ $urlAvatar }}"
+                                class="rounded-circle img-thumbnail shadow-sm"
+                                style="width: 120px; height: 120px; margin-top: -70px; object-fit: cover; border: 4px solid white;">
+
+                            <div class="position-absolute translate-middle-x start-50" style="bottom: -5px;">
+                                <span class="badge rounded-circle bg-dark p-2 shadow-sm">
+                                    <i class="bi bi-camera-fill text-white" style="font-size: 0.8rem;"></i>
+                                </span>
+                            </div>
+                        </label>
+
+                        <input type="file" id="upload-foto" class="d-none" wire:model.live="novaFoto" accept="image/*">
+
+                        <div wire:loading wire:target="novaFoto" class="position-absolute top-50 start-50 translate-middle">
+                            <div class="spinner-border text-primary spinner-border-sm" role="status"></div>
+                        </div>
+                    </div>
                     <h4 class="mt-3 fw-bold text-center" style="font-family: 'Rajdhani', sans-serif;">{{$user->name}}</h4>
                     <p class="text-center text-primary small fw-bold mt-n2">PROFESSOR</p>
 

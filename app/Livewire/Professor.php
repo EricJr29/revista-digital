@@ -4,9 +4,14 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Postagem;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class Professor extends Component
 {
+    use WithFileUploads; 
+
+    public $novaFoto;
     public $user;
     public $postagens_pendentes;
     public $seguidores;
@@ -64,6 +69,23 @@ class Professor extends Component
         $this->postagens_pendentes = Postagem::where('status', 'pendente')->get();
 
         session()->flash('error', 'Postagem enviada para revisão.');
+    }
+
+    public function updatedNovaFoto()
+    {
+        $this->validate([
+            'novaFoto' => 'image|max:2048', 
+        ]);
+
+        if ($this->user->image) {
+            Storage::disk('public')->delete($this->user->image);
+        }
+
+        $caminho = $this->novaFoto->store('avatars', 'public');
+
+        $this->user->update([
+            'foto' => $caminho
+        ]);
     }
 
     public function render()

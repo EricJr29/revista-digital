@@ -16,12 +16,17 @@ class AdminController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->permissao != 3) redirect()->route('home')->with('error', 'Sem permissão!');
+        if (Auth::user()->permissao != 3) redirect()->route('home')->with('error', 'Sem permissão!');
         $user = Auth::user();
         $avaliar = User::where('permissao', 0)->get();
         $postagens = Postagem::where('usuario_id', $user->id)->get();
         $seguidores = Seguidor::where('seguido_id', $user->id)->get();
         return view('admin.dashboard', compact('user', 'postagens', 'seguidores', 'avaliar'));
+    }
+
+    public function usuarios()
+    {
+        return view('admin.usuarios_lista');
     }
 
     /**

@@ -6,7 +6,7 @@
 
             <div class="col-12 col-md-4" style="margin-top: -80px;">
                 <div class="card shadow-sm border-0 p-4 bg-white rounded-3 mb-4">
-                    <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('img/default-avatar.png') }}"
+                    <img src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('img/default-avatar.png') }}"
                         class="rounded-circle mx-auto img-thumbnail shadow-sm"
                         style="width: 120px; height: 120px; margin-top: -70px; object-fit: cover; border: 4px solid white;">
 

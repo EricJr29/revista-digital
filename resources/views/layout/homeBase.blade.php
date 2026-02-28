@@ -127,13 +127,6 @@ $rotaDestino = match(Auth::user()->permissao) {
                     @endauth
                 </div>
 
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 fw-bold text-primary">Suporte</h5>
-                    <p><a href="#" class="text-white text-decoration-none small">FAQ</a></p>
-                    <p><a href="#" class="text-white text-decoration-none small">Termos de Uso</a></p>
-                    <p><a href="#" class="text-white text-decoration-none small">Privacidade</a></p>
-                </div>
-
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                     <h5 class="text-uppercase mb-4 fw-bold text-primary">Contato</h5>
                     <p class="small"><i class="bi bi-envelope-fill me-2"></i> ericjroliveira05@gmail.com</p>
@@ -154,7 +147,7 @@ $rotaDestino = match(Auth::user()->permissao) {
                     </p>
                 </div>
                 <div class="col-md-5 col-lg-4 text-center text-md-end">
-                    <span class="badge bg-primary rounded-pill px-3">Versão 1.0</span>
+                    <span class="badge bg-primary rounded-pill px-3">Versão 2.0</span>
                 </div>
             </div>
         </div>

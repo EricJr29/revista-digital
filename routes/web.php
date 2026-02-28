@@ -29,5 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/postagem/editar/{id}', [PostagemController::class, 'edit'])->name('postagem.edit');
     Route::get('/postagem/validar/{id}', [PostagemController::class, 'validar'])->name('postagem.validar');
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/usuarios', [AdminController::class, 'usuarios'])->name('admin.usuarios');
     Route::get('/professor', [ProfessorController::class, 'index'])->name('professor.dashboard');
 });
