@@ -46,8 +46,8 @@ Este projeto marca o meu amadurecimento como desenvolvedor, onde substituí prá
 Siga estas instruções para configurar o ambiente local:
 
 ### 1. Clonar o Repositório
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/EricJr29/revista-digital
+cd revista-digital
 
 ### 2. Instalar Dependências do PHP (Composer)
 composer install
@@ -63,7 +63,7 @@ cp .env.example .env
 
 ### 5. Gerar Chave e Migrar Banco
 php artisan key:generate
-php artisan migrate
+php artisan migrate --seed
 php artisan storage:link
 
 ### 6. Iniciar a Aplicação
